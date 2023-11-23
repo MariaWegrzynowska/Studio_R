@@ -1,0 +1,136 @@
+---
+title: "Instrukcje warunkowe, petla for, funckje"
+output: html_notebook
+---
+
+##Instrukcje warunkowe
+
+```{r}
+x <- 10
+x
+```
+
+```{r}
+
+if (x<0){ #otwierająca klamramusi byc w tej samej lini co if
+x<- 0
+} 
+
+x
+```
+```{r}
+
+
+if (x<0) {
+  x<- 0
+} else { #else musi byc w tej samej lini co nawias zamykający
+x<-x/2
+}
+
+x
+
+```
+```{r}
+x<- 5
+x
+
+if (x<0) {
+  x<-0
+}  else if (x<=1) {
+ x<- x/2
+
+ } else {
+  x<- 1
+ }
+
+x
+```
+
+## pętla for
+
+```{r}
+for  (i in 1:10){
+  print (2^10)
+}
+```
+
+
+```{r}
+for (i in 1:10) {
+  print (2^i)
+}
+```
+Imie składa się z ... liter.
+```{r}
+imiona <- c("Mikołoaj", "Maria", "Krysia", "Władzia", "Konsti")
+
+for (imie in imiona) {
+n <- nchar (imie)
+tekst <- paste ("Imię", imie, "składa się z", n, "liter.")
+print(tekst)
+}
+
+```
+
+```{r}
+drugie_potegi <- numeric(10)
+
+for (i in  1:10) {
+  drugie_potegi[i] <- i^2
+}
+
+drugie_potegi
+
+drugie_potegi <- (1:10) ^2
+drugie_potegi
+
+#jak sie da to raczej nie uzywac petli, są wolne
+```
+Tabliczka mnożenia
+```{r}
+tabliczka_mnozenia <- matrix (nrow=5, ncol=5)
+for (w in 1:5) {
+  for (k in 1:5) {
+    tabliczka_mnozenia[w,k]<- w*k
+  }
+}
+
+tabliczka_mnozenia
+```
+##Funkcje
+```{r}
+sqrt (x=100)
+
+pole_koła <- function(r) {
+  pi*r^2
+}
+pole_koła(r=2)  #r - parametr, 2-argument
+```
+
+```{r}
+pole_prostokąt <- function(a, b) {
+  O <- 2*(a+b)
+  P <- a*b
+  return (list(obwód = O,pole = P))
+}
+
+wynik <- pole_prostokąt(a=2, b=4)
+
+wynik$pole
+```
+
+```{r}
+potega <- function (x, n=2) {
+  x^n
+}
+
+potega (2, 10)
+potega (23)
+```
+Zadanie: Ciąg fibonaciego
+```{r}
+fibo <- function (n) {
+  
+}
+```
+

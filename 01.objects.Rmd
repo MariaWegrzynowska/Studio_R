@@ -1,0 +1,372 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## R jako kalkulator
+
+ctrl + enter wywołajlinie kodu
+ctrl + shift + enter wywołaj wszystkie linie kodu
+
+
+```{r}
+2+3
+2^10
+100/5
+
+sqrt(100)
+exp(1) # e^1
+log(x = 100, base = 10)
+```
+
+## Tworzenie obiektów i ich usuwanie
+
+```{r}
+x<- 2
+y <- x^10
+y <- y^(1/4)
+z <- x*y
+
+x
+print (x)
+y
+z
+```
+```{r}
+remove (x) #remove = rm
+rm (y,z)
+```
+
+
+## Wektory
+
+Tworzenie wektorów
+
+```{r}
+u01 <- c(10, 20, 30, 40, 50)
+u02 <- seq (from = 10, to = 50, by = 10)
+u03 <- c(10L, 20L, 30L, 40L, 50L)
+u04 <- 1:5
+u05 <- rep(10, 5)
+u06 <- rep (1:3, 3)
+u07 <- rep(c(1, 2, 4), c(2, 3, 4))
+u08 <- c("Ala", "ma", "kota")
+u09 <- c(TRUE, TRUE, FALSE, FALSE) # TRUE = T, FALSE = F, lepiej nie używać
+u10 <-  u01>20
+```
+
+wbudowane wektory
+```{r}
+LETTERS 
+letters
+month.name
+```
+
+Odwoływanie się do elementu w wektorze
+```{r}
+u01 [1]
+u01 [c(1, 3)]
+u01 [1:3]
+head (u01, 3)
+tail (u01, 1)
+```
+Nadpisywanie i dodawanie elementów
+```{r}
+u01 [3] <- 300
+u01 [1:2] <- c(100, 200)
+
+
+u01 [6:7] <- c(60, 70)
+
+u01 [8] <- "80"
+
+u08[4:6] <- c("i", 2,  "psy.")
+u08
+```
+
+Działania na wektorach
+```{r}
+sum (u02)
+sum (u09)
+
+mean (u02)
+sd (u02)
+median (u02)
+
+sqrt (u02)
+log (u02)
+
+u02 <- u02 + 100
+u02 <- u02/10
+u02 <- u02/10
+u02 <- u02 + 10
+
+u03 +u04
+u03*u04
+
+```
+
+
+Braki danych
+```{r}
+?NA # pomoc do NA
+
+#Na - brak danych
+#Pomoc - ? (raczej w konsoli) / F1
+
+u11 <- c(180, 160, NA, 200)
+u11
+
+mean(u11)
+mean(u11,na.rm = TRUE)
+
+sum (u11, na.rm = TRUE)
+sqrt(u11)
+
+
+```
+
+Wartości specjalne
+```{r}
+u12 <- (-1):4
+u12
+
+log(u12)
+log(Inf)
+
+#NaN - Not a Number
+#Inf - infinity - nieskończoność
+```
+
+## Faktory / Czynniki
+
+```{r}
+f1 <- c('Podstawowe', 'Srednie', 'Wyzsze', 'Zawodowe', 'Podstawowe', "Srednie", 'Srednie', 'Wyzsze', 'Wyzsze', 'Srednie')
+
+f1 
+class(f1)
+table (f1)
+barplot(table(f1))
+
+f1
+f1<- factor(f1, levels = c('Podstawowe', 'Zawodowe', 'Srednie', 'Wyzsze'))
+table(f1)
+class(f1)
+
+barplot(table(f1))
+
+
+
+```
+```{r}
+
+```
+
+## Macierze 
+
+```{r}
+m1 <- matrix(1:12, nrow=4)
+
+m2 <- matrix(1:12, nrow=4, byrow = TRUE)
+
+m3 <- matrix(u06, ncol=3) #macierz kwadratowa, tyle samo wierszy co kolumn
+
+m1
+m2
+m3
+
+m4 <- cbind(u02, u03, u04)
+m4
+
+m5 <- rbind (u02, u03, u04)
+m5
+
+m6 <- diag(1:4) # macierz diagonalna
+m6
+
+m7 <- diag(1, nrow=3) # macierz jednostkowa
+m7
+
+m8 <- cbind(letters[1:5], LETTERS[6:10])
+m8
+
+m9 <- rbind(u08, u12)
+m9
+
+m10 <- m1<=6
+m10
+
+#wszystkie elementy macierzy są tego samego typu
+
+
+```
+Sprawdzanie klasy / typu macierzy
+```{r}
+class (m1)
+typeof (m1)
+is.matrix (m1)
+is.integer(m1)
+```
+Sprawdzanie wymiarów macierzy
+```{r}
+length(m1)
+nrow(m1)
+ncol(m1)
+dim(m1)
+
+```
+
+
+Odwoływaniue się i nadpisywanie elementów macierzy
+```{r}
+m1[1,2]
+m1[3,]
+m1[,2]
+m1[2:4, 2:3]
+
+m1[4,3] <- 0
+m1
+
+m1[,1] <- c(10, 20, 30, 40)
+m1
+
+m1[,2] <- m1[,2]*100
+m1
+
+m3[1,1] <- 'a'
+m3
+
+typeof(m3)
+```
+Działania na macierzach
+```{r}
+sum(m1)
+mean(m1)
+
+sqrt(m1)
+
+m1 + m2 
+```
+
+## Ramki danych
+
+Tworzenie ramek danych
+```{r}
+df1 <- data.frame (imie =c('Mruczek', 'Puszek', 'Lusia', 'Szeryf', 'Hiacynta', 'Irys'),  wiek = c(8, 2, 7, 5, 2, 2))
+df1
+
+df2 <- data.frame (u03, u05, u10)
+df2
+
+df3 <- data.frame(m5)
+df3
+
+df4 <- data.frame (r=1:10)
+#df4$0 <- c(2*pi*1, 2*pi**2)
+df4
+
+df4$O <- 2*df4$r*pi
+df4
+
+df4$P <- pi*df4$r^2
+df4
+
+
+```
+
+
+Odwoływanie się do elementów ramki danych
+```{r}
+# [wiersz, kolumna]
+df1[2,1]
+#cały wiersz
+df1[2, ]
+
+df1[, 1]
+
+df1[,1, drop= FALSE]
+
+df1[,"imie"]
+
+df2[,2:3]
+df2[,c(1,3)]
+df2[,c("u03", "u05")]
+
+
+df2 [1:2,c(1, 3)]
+
+df$imie
+```
+
+Przydatne funkcje
+
+```{r}
+nrow(df1)
+ncol(df1)
+dim(df1)
+
+colnames (df1)
+colnames(df1) <- c("Imie", "Wiek")
+df1
+
+str(df1)
+
+
+```
+
+## Listy
+
+Tworzenie list
+```{r}
+l1 <- list(u01, u02, m1, m10)
+l1
+
+l2 <- list()
+l2
+
+l2[[1]] <- u01
+l2[[2]] <- m1
+l2[[3]] <- l1 
+l2
+
+l3 <- list(a= 1:3, b = letters [1:4], c = matrix(1:4, ncol=2))
+l3
+
+l3[["d"]]<- c(TRUE, FALSE)
+l3
+
+l3$e <- df1
+l3
+
+l4 <- list(df1, df2, df3, df4)
+l4
+```
+Odwoływanie się do elementów listy
+```{r}
+l3[[1]] #wektor
+l3[1] #lista
+l3[1:2] #lista
+
+l3["c"] #lista
+l3[["c"]] #macierz
+
+l3$c #macierz
+
+#cel to element d
+l3[[2]][4]
+#wektor --> dowoływanie sie do wektora []
+
+#Elementr b i 4 element
+l3[["b"]][4]
+
+#l3 ramka danych uimie
+
+l3[[5]][,1]
+l3[['e']][,'Imie']
+
+l3$e$Imie
+
+l2[[3]][[3]][,1]
+
+```
+
